@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from '../UI/Text';
 import { arrayOf, shape, number, string, element } from 'prop-types';
-import { SectionList, View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { colors } from '../theme';
 
 const styles = StyleSheet.create({
@@ -58,9 +58,7 @@ const Timeline = ({ events }) => {
                                     JOUR {event.dayNumber}
                                 </Text>
                             </View>
-                            {!isLastItem ? (
-                                <View style={styles.line}></View>
-                            ) : null}
+                            {!isLastItem ? <View style={styles.line} /> : null}
                         </View>
                         <View style={styles.detailContainer}>
                             <View style={styles.icon}>{event?.icon}</View>

@@ -6,13 +6,13 @@
  * @flow strict-local
  */
 
-import React from 'react';
 import type { Node } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
-import DeleteAccount from './Containers/DeleteAccount';
-
-import { colors } from './Components/theme';
 import styled from '@emotion/native';
+import React from 'react';
+
+import DeleteAccount from './Containers/DeleteAccount';
+import { colors } from './Components/theme';
 
 const styles = StyleSheet.create({
     layout: {
@@ -43,6 +43,7 @@ const App: () => Node = () => {
 
 const Content = styled.View({
     paddingHorizontal: 20,
+    paddingVertical: 20,
 });
 
 export default App;

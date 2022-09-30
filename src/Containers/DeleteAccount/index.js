@@ -1,10 +1,10 @@
-import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Text } from '../../Components/UI/Text';
-import Animation from '../../Components/Animation';
 import { colors, size } from '../../Components/theme';
+import React from 'react';
 
+import Animation from '../../Components/Animation';
 import messages from '../../i18n/messages';
+import { Text } from '../../Components/UI/Text';
 import DeleteUserAccountTimeline from '../../Components/DeleteUserAccountTimeline';
 import useDeleteUserAccount from '../../hooks/useDeleteUserAccount';
 
@@ -12,11 +12,9 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         display: 'flex',
-        padding: 5,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 20,
     },
     cancelRequestContainer: {
         flex: 1,
@@ -29,10 +27,17 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.pepper,
         borderBottomWidth: 1,
     },
+    headerTitle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     headerMessage: {
-        alignItems: 'center',
-        textAlign: 'center',
+        marginHorizontal: 50,
         paddingBottom: 20,
+    },
+    headerAnimation: {
+        alignItems: 'center',
     },
     suppressAccountButton: {
         flex: 1,
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.mainOrange,
         borderRadius: 50,
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 30,
     },
     appButtonText: {
         fontSize: size.medium,
@@ -54,6 +59,23 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
 });
+
+const renderHeader = () => (
+    <>
+        <View style={styles.headerTitle}>
+            <Text fontSize="large">{messages.DeleteUserAccount.title}</Text>
+            <Text>X</Text>
+        </View>
+        <View style={styles.headerAnimation}>
+            <Animation />
+        </View>
+        <View style={styles.headerMessage}>
+            <Text style={{ textAlign: 'center' }}>
+                {messages.DeleteUserAccount.subTitle}
+            </Text>
+        </View>
+    </>
+);
 
 const DeleteAccount = () => {
     const { askForDeleteRequest, cancelDeleteRequest, deleteRequestState } =
@@ -63,25 +85,7 @@ const DeleteAccount = () => {
         <>
             {!deleteRequestState ? (
                 <View style={styles.screenContainer}>
-                    <View style={styles.headerContainer}>
-                        <View
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                            }}>
-                            <Text fontSize="large">
-                                {messages.DeleteUserAccount.title}
-                            </Text>
-                            <Text>X</Text>
-                        </View>
-                        <View style={styles.headerMessage}>
-                            <Animation />
-                        </View>
-                        <Text style={styles.headerMessage}>
-                            {messages.DeleteUserAccount.subTitle}
-                        </Text>
-                    </View>
+                    <View style={styles.headerContainer}>{renderHeader()}</View>
                     <View style={styles.mainContainer}>
                         <Text>{messages.DeleteUserAccount.steps}</Text>
                         <View style={{ paddingTop: 20 }}>
@@ -91,15 +95,26 @@ const DeleteAccount = () => {
                     <View
                         style={{
                             flex: 1,
-                            flexDirection: 'row',
-                            paddingTop: 40,
+                            paddingTop: 20,
                         }}>
-                        <Image
-                            source={require('../../Assets/warningDelete.png')}
-                        />
-                        <Text>{messages.DeleteUserAccount.warning}</Text>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                            }}>
+                            <Image
+                                source={require('../../Assets/warning.png')}
+                            />
+                            <View style={{ paddingLeft: 5 }}>
+                                <Text>
+                                    {messages.DeleteUserAccount.warning.title}
+                                </Text>
+                            </View>
+                        </View>
+                        <Text>
+                            {messages.DeleteUserAccount.warning.content}
+                        </Text>
                     </View>
-                    <View style={{ paddingBottom: 20 }}>
+                    <View style={{ paddingTop: 40 }}>
                         <TouchableOpacity
                             onPress={askForDeleteRequest}
                             style={styles.appButtonContainer}>
